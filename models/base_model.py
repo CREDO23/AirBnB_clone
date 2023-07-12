@@ -9,15 +9,20 @@ import datetime
 
 class BaseModel:
     """This is the base class"""
-
-    __name__
     
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """The initializer function"""
 
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+        if kwargs is not None and kwargs != {}:
+            for k, v in kwargs.items():
+                self.__dict__[k] = v
+
+                if k == 'created_at' or k == 'updated_at':
+                    self.__dict__[k] = datetime.datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
 
     def __str__(self):
         """Returns a string representation of this object"""
