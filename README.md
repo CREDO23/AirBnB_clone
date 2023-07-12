@@ -154,3 +154,4 @@ $ ./console.py
 
 ## Authors
    - BAKERA Thierry (bakerathierry@gmail.com)
+   - Nyabuto Vallentine (nyabutovalentine18@gmail.com)
