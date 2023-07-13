@@ -1,0 +1,66 @@
+{
+  "BaseModel.0a4eabb1-4876-4e42-b59c-b4a08844f269": {
+    "id": "0a4eabb1-4876-4e42-b59c-b4a08844f269",
+    "created_at": "2023-07-13T11:40:55.190030",
+    "updated_at": "2023-07-13T11:40:55.190067",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  },
+  "BaseModel.510243c2-ba1b-436c-9809-96684e85c921": {
+    "id": "510243c2-ba1b-436c-9809-96684e85c921",
+    "created_at": "2023-07-13T11:41:24.155667",
+    "updated_at": "2023-07-13T11:41:24.155678",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  },
+  "BaseModel.64a812b6-880a-4317-bab9-57a7fb7ded24": {
+    "id": "64a812b6-880a-4317-bab9-57a7fb7ded24",
+    "created_at": "2023-07-13T11:41:27.534903",
+    "updated_at": "2023-07-13T11:41:27.534925",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  },
+  "BaseModel.d957d3ea-3d5a-489b-9ffe-ed14d1f67033": {
+    "id": "d957d3ea-3d5a-489b-9ffe-ed14d1f67033",
+    "created_at": "2023-07-13T11:41:29.731641",
+    "updated_at": "2023-07-13T11:41:29.731667",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  },
+  "BaseModel.b7228571-bad9-4907-9281-6eff894fd81f": {
+    "id": "b7228571-bad9-4907-9281-6eff894fd81f",
+    "created_at": "2023-07-13T11:41:31.510847",
+    "updated_at": "2023-07-13T11:41:31.510865",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  },
+  "BaseModel.33f30e79-2f70-41fe-be3f-ec50725b4902": {
+    "id": "33f30e79-2f70-41fe-be3f-ec50725b4902",
+    "created_at": "2023-07-13T11:41:32.594511",
+    "updated_at": "2023-07-13T11:41:32.594532",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  },
+  "BaseModel.b31babee-f545-4df3-b0f8-7d385359669c": {
+    "id": "b31babee-f545-4df3-b0f8-7d385359669c",
+    "created_at": "2023-07-13T11:41:33.326200",
+    "updated_at": "2023-07-13T11:41:33.326214",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  },
+  "BaseModel.8baf7ded-e11f-4242-b4b2-ce148bf104bc": {
+    "id": "8baf7ded-e11f-4242-b4b2-ce148bf104bc",
+    "created_at": "2023-07-13T11:41:34.036780",
+    "updated_at": "2023-07-13T11:41:34.036805",
+    "name": "My_First_Model",
+    "my_number": 89,
+    "__class__": "BaseModel"
+  }
+}

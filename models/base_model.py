@@ -6,6 +6,7 @@ This is module containing the base class for all other classes
 
 import uuid
 import datetime
+from models import storage
 
 class BaseModel:
     """This is the base class"""
@@ -23,6 +24,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """Returns a string representation of this object"""
@@ -33,6 +35,7 @@ class BaseModel:
         """Set the updated_at attribute on this object"""
 
         self.updated_at = datetime.datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values of the __dit__ attribute"""
@@ -43,3 +46,4 @@ class BaseModel:
         properties["updated_at"] = properties["updated_at"].isoformat()
 
         return properties
+
