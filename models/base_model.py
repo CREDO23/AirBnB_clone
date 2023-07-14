@@ -1,49 +1,53 @@
 #!/usr/bin/python3
+from datetime import datetime
+from uuid import uuid4
+import models
 
-"""
-This is module containing the base class for all other classes
-"""
+"""This module contains the base class"""
 
-import uuid
-import datetime
-from models import storage
 
-class BaseModel:
-    """This is the base class"""
-    
+class BaseModel():
+    """The base class"""
+
     def __init__(self, *args, **kwargs):
-        """The initializer function"""
-
-        if kwargs is not None and kwargs != {}:
-            for k, v in kwargs.items():
-                self.__dict__[k] = v
-
-                if k == 'created_at' or k == 'updated_at':
-                    self.__dict__[k] = datetime.datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
+        """The initialization method"""
+        date_format = '%Y-%m-%dT%H:%M:%S.%f'
+        if kwargs:
+            for key, value in kwargs.items():
+                if "created_at" == key:
+                    self.created_at = datetime.strptime(kwargs["created_at"],
+                                                        date_format)
+                elif "updated_at" == key:
+                    self.updated_at = datetime.strptime(kwargs["updated_at"],
+                                                        date_format)
+                elif "__class__" == key:
+                    pass
+                else:
+                    setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.now()
-            self.updated_at = datetime.datetime.now()
-            storage.new(self)
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
-        """Returns a string representation of this object"""
+        """The str representation"""
+        return ('[{}] ({}) {}'.
+                format(self.__class__.__name__, self.id, self.__dict__))
 
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
-    
+    def __repr__(self):
+        """The rpr representation"""
+        return (self.__str__())
+
     def save(self):
-        """Set the updated_at attribute on this object"""
-
-        self.updated_at = datetime.datetime.now()
-        storage.save()
+        """The save method"""
+        self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
-        """Returns a dictionary containing all keys/values of the __dit__ attribute"""
-
-        properties = self.__dict__.copy()
-        properties["__class__"] = type(self).__name__
-        properties["created_at"] = properties["created_at"].isoformat()
-        properties["updated_at"] = properties["updated_at"].isoformat()
-
-        return properties
-
+        """Return a dict representation"""
+        dic = self.__dict__.copy()
+        dic["created_at"] = self.created_at.isoformat()
+        dic["updated_at"] = self.updated_at.isoformat()
+        dic["__class__"] = self.__class__.__name__
+        return dic

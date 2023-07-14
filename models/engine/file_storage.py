@@ -1,53 +1,50 @@
 #!/usr/bin/python3
-"""This module contains the self class"""
-
+"""This file contains the storage engine"""
 import json
-import os
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class FileStorage:
-    """The self class"""
+    """File storage class"""
 
-    __file_path = "file.json"
+    __file_path = 'file.json'
     __objects = {}
-    classes = {}
-
-    def __init__(self):
-        """Constructor"""
+    class_dict = {"BaseModel": BaseModel, "User": User, "Place": Place,
+                  "Amenity": Amenity, "City": City, "Review": Review,
+                  "State": State}
 
     def all(self):
-        """Returns all objects"""
+        """Return dictionary of <class>.<id> : object instance"""
         return self.__objects
 
     def new(self, obj):
-        """sets in __objects the obj with key <obj class name>.id"""
-
-        self.__objects[f'{type(obj).__name__}.{obj.id}'] = obj
+        """Set new __objects to existing dictionary of instances"""
+        if obj:
+            key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
-        """serializes __objects to the JSON file (path: __file_path)"""
+        """Save/serialize obj dictionaries to json file"""
+        obj_dict = {}
 
-        with open(self.__file_path, "w", encoding="utf-8") as write:
-            data = {k: v.to_dict() for k, v in self.__objects.items()}
-            json.dump(data, write)
-        
-    def avClasses(self):
-        """Returns all availble classes"""
-
-        from models.base_model import BaseModel
-
-        classes = {
-            "BaseModel": BaseModel
-        }
-
-        return classes
+        for key, obj in self.__objects.items():
+            obj_dict[key] = obj.to_dict()
+        with open(self.__file_path, 'w', encoding="UTF-8") as f:
+            json.dump(obj_dict, f)
 
     def reload(self):
-        """deserializes the JSON file to __objects (only if the JSON file (__file_path) exists"""
-        if not os.path.isfile(self.__file_path):
-            return
-
-        with open(self.__file_path, "r", encoding="utf-8") as f:
-            objc_dict = json.load(f)
-            objc_dict = {k : self.avClasses()[v["__class__"]](**v) for k, v in objc_dict.items()}
-            self.__objects = objc_dict
-    
+        """Deserialize/convert obj dicts back to instances, if it exists"""
+        try:
+            with open(self.__file_path, 'r', encoding="UTF-8") as f:
+                new_obj_dict = json.load(f)
+            for key, value in new_obj_dict.items():
+                obj = self.class_dict[value['__class__']](**value)
+                self.__objects[key] = obj
+        except FileNotFoundError:
+            pass
