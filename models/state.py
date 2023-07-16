@@ -1,10 +1,14 @@
 #!/usr/bin/python3
 """
-This module contains the place class
+State class, a subclass of BaseModel
 """
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """The place class"""
+    """
+    A subclass of BaseModel class
+    Public class attribute:
+        name: (str)
+    """
     name = ""
