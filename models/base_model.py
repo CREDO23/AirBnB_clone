@@ -1,27 +1,19 @@
 #!/usr/bin/python3
+"""This module contains the base model
+    from which all others class will inherit
+"""
+
 from datetime import datetime
 from uuid import uuid4
 import models
 
-"""
-Parent class to all classes in the AirBnB clone project
-"""
-
 
 class BaseModel():
-    """Parent class for AirBnB clone project
-    Methods:
-        __init__(self, *args, **kwargs)
-        __str__(self)
-        __save(self)
-        __repr__(self)
-        to_dict(self)
-    """
+    """The base class for all others"""
 
     def __init__(self, *args, **kwargs):
-        """
-        Initialize attributes: uuid4, dates when class was created/updated
-        """
+        """The initializer"""
+
         date_format = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs:
             for key, value in kwargs.items():
@@ -42,32 +34,23 @@ class BaseModel():
             models.storage.new(self)
 
     def __str__(self):
-        """
-        Return class name, id, and the dictionary
-        """
+        """Returns a string representation of this class"""
+
         return ('[{}] ({}) {}'.
                 format(self.__class__.__name__, self.id, self.__dict__))
 
     def __repr__(self):
-        """
-        returns string repr
-        """
+        """Return a string representation of this object"""
+
         return (self.__str__())
 
     def save(self):
-        """
-        Instance method to:
-        - update current datetime
-        - invoke save() function &
-        - save to serialized file
-        """
+        """The save method for this object"""
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """
-        Return dictionary of BaseModel with string formats of times
-        """
+        """Return a dict representation of this object"""
         dic = self.__dict__.copy()
         dic["created_at"] = self.created_at.isoformat()
         dic["updated_at"] = self.updated_at.isoformat()

@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Defines the HBnB console."""
+
+"""This module contains the console"""
+
 import cmd
 import re
 from shlex import split

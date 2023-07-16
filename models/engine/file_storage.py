@@ -1,27 +1,19 @@
 #!/usr/bin/python3
-'''AirBnB clone project File Storage'''
+
+
+"""This module contains the storage engine"""
 import json
 from models.base_model import BaseModel
 from models.user import User
-from models.state import State
-from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models.state import State
+from models.city import City
 
 
 class FileStorage:
-    """ This is a storage engine for AirBnB clone project
-    Class Methods:
-        all: Returns the object
-        new: updates the dictionary id
-        save: Serializes, or converts Python objects into JSON strings
-        reload: Deserializes, or converts JSON strings into Python objects.
-    Class Attributes:
-        __file_path (str): The name of the file to save objects to.
-        __objects (dict): A dictionary of instantiated objects.
-        class_dict (dict): A dictionary of all the classes.
-    """
+    """The storage engine"""
 
     __file_path = 'file.json'
     __objects = {}
@@ -30,11 +22,11 @@ class FileStorage:
                   "State": State}
 
     def all(self):
-        '''Return dictionary of <class>.<id> : object instance'''
+        """Return dictionary of <class>.<id> : object instance"""
         return self.__objects
 
     def new(self, obj):
-        '''Set new __objects to existing dictionary of instances'''
+        """Set new __objects to existing dictionary of instances"""
         if obj:
             key = '{}.{}'.format(obj.__class__.__name__, obj.id)
             self.__objects[key] = obj
